@@ -1,0 +1,382 @@
+:root {
+  --primary-400: hsl(230, 11%, 40%);
+  --primary-900: hsl(230, 29%, 20%);
+  --secondary-400: hsl(0, 100%, 68%);
+  --neutral-100: hsl(255, 0%, 100%);
+  --neutral-200: hsl(207, 33%, 95%);
+  --neutral-400: hsl(231, 7%, 65%);
+
+  --ff-main: 'Barlow', sans-serif;
+  --ff-accent: 'Barlow Condensed', sans-serif;
+
+  --ff-body: var(--ff-main);
+  --ff-heading: var(--ff-accent);
+
+  --fw-400: 400;
+  --fw-700: 700;
+
+  --fs-body: 1.8rem;
+  --fs-heading-main: 4rem;
+  --fs-heading-sub: 1.6rem;
+}
+
+@media screen and (min-width: 48em) {
+  :root {
+    --fs-body: 2rem;
+    --fs-heading-main: 6.5rem;
+    --fs-heading-sub: 1.8rem;
+  }
+}
+
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+*,
+*::before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: var(--fs-body);
+  font-family: var(--ff-body);
+  font-weight: var(--fw-400);
+  color: var(--primary-400);
+}
+
+body::before {
+  content: '';
+  width: 50%;
+  height: 42.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 5rem;
+  background-color: var(--neutral-200);
+  z-index: -1;
+  animation: slidedown 2s forwards;
+}
+
+a {
+  text-decoration: none;
+}
+
+.overflow {
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 3.2rem;
+  width: 100%;
+  max-width: 120rem;
+  gap: 6rem;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 48em) {
+  .container {
+    gap: 16rem;
+    padding: 7rem 3.2rem;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+}
+
+.nav_toggler {
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  transition: background-image 0.2s;
+  background-image: url('./images/icon-hamburger.svg');
+}
+
+.nav_toggler[data-toggled] {
+  background-image: url('./images/icon-close.svg');
+}
+
+@media screen and (min-width: 48em) {
+  .nav_toggler {
+    display: none;
+  }
+}
+
+.nav_toggler[data-toggled] + .nav_list {
+  opacity: 1;
+  animation: expand 0.5s forwards;
+}
+
+.nav_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.8rem;
+
+  background-color: var(--neutral-100);
+  position: absolute;
+  top: calc(100% + 3.4rem);
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  padding: 2.4rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: top right;
+  transition: opacity 0.2s;
+  animation: close 0.5s both;
+}
+
+@media screen and (min-width: 48em) {
+  .nav_list {
+    position: relative;
+    inset: initial;
+    margin: initial;
+    width: initial;
+    z-index: initial;
+    transform: initial;
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
+    animation: none;
+    opacity: 1;
+    flex-direction: row;
+    gap: 4rem;
+  }
+}
+
+.nav_link {
+  font-family: var(--ff-accent);
+  font-weight: var(--fw-700);
+  color: var(--primary-900);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--fs-heading-sub);
+}
+
+@media screen and (min-width: 48em) {
+  .nav_link:hover,
+  .nav_link:focus {
+    text-decoration: underline;
+  }
+}
+
+.login {
+  color: var(--neutral-400);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--neutral-400);
+  opacity: 0.4;
+}
+
+@media screen and (min-width: 48em) {
+  .divider {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+@media screen and (min-width: 56.25em) {
+  .content {
+    flex-direction: row;
+    gap: 10rem;
+  }
+}
+
+.content > * {
+  flex: 1;
+}
+
+.content_desc {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 48em) {
+  .content_desc {
+    gap: 2.2rem;
+  }
+}
+
+.content_desc p {
+  line-height: 1.6;
+  margin-top: 1rem;
+  max-width: 28ch;
+}
+
+.heading {
+  font-family: var(--ff-heading);
+  text-transform: uppercase;
+}
+
+.main {
+  font-size: var(--fs-heading-main);
+  font-weight: var(--fw-700);
+  color: var(--primary-900);
+  line-height: 1;
+}
+
+.sub {
+  font-size: var(--fs-heading-sub);
+}
+
+.sub h1 {
+  color: var(--neutral-400);
+  letter-spacing: 0.3em;
+}
+
+.tagline {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chip {
+  line-height: 1;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  font-weight: var(--fw-700);
+  padding: 0.6rem 1.1rem;
+  border-radius: 5rem;
+  color: var(--neutral-100);
+  background-color: var(--primary-900);
+  font-size: calc(var(--fs-heading-sub) - 0.2rem);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-family: var(--ff-accent);
+  color: var(--neutral-400);
+  letter-spacing: 0.1em;
+}
+
+@media screen and (min-width: 48em) {
+  .cta {
+    gap: 2.2rem;
+    margin-top: 4rem;
+  }
+}
+
+.button {
+  color: var(--neutral-100);
+  background-color: var(--secondary-400);
+  padding: 1.6rem;
+  font-weight: var(--fw-700);
+  border-radius: 0.5rem;
+}
+
+@media screen and (min-width: 48em) {
+  .button {
+    padding: 1.8rem 3rem;
+    transition: opacity 0.2s;
+  }
+
+  .button:hover {
+    opacity: 0.8;
+  }
+}
+
+.content_img {
+  position: relative;
+}
+
+.content_img::before {
+  content: '';
+  background-image: url('./images/illustration-devices.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 110%;
+  width: 145%;
+  height: 70vw;
+  display: inline-block;
+}
+
+@media screen and (min-width: 56.25em) {
+  .content_img {
+    order: 1;
+  }
+
+  .content_img::before {
+    position: absolute;
+    top: -10%;
+    left: -5%;
+    background-size: 100%;
+    width: 183%;
+    height: 47rem;
+  }
+}
+
+@keyframes expand {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes close {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+@keyframes slidedown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
